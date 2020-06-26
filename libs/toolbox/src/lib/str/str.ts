@@ -47,6 +47,12 @@ export class Str {
    */
   public static get englishLettersOrdered(): string { return ENGLISH_LETTERS_LOWERCASE; }
 
+  /**
+   * Return `true` if a specified string is null, empty, or consists only of white-space characters.
+   */
+  public static isNullOrEmpty(str: string): boolean {
+    return str === undefined || str === null || str.length === 0;
+  }
 
   /**
    * Return `true` if a specified string is null, empty, or consists only of white-space characters.
@@ -113,7 +119,7 @@ export class Str {
    * @param str
    */
   public static capitalize(str: string): string {
-    return Str.isNullOrWhiteSpace(str) ? Str.empty : str.charAt(0).toUpperCase() + str.slice(1);
+    return Str.isNullOrWhiteSpace(str) ? Str.empty : str.charAt(0).toUpperCase().concat(str.slice(1));
   }
 
   /**

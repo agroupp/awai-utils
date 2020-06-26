@@ -2,6 +2,15 @@ import { Str } from '../src';
 
 describe('String manipulations', () => {
   it('should detect empty string', () => {
+    expect(Str.isNullOrEmpty('')).toBeTruthy();
+    expect(Str.isNullOrEmpty(Str.empty)).toBeTruthy();
+    expect(Str.isNullOrEmpty(' ')).toBeFalsy();
+    expect(Str.isNullOrEmpty(null)).toBeTruthy();
+    expect(Str.isNullOrEmpty(undefined)).toBeTruthy();
+    expect(Str.isNullOrEmpty('  a ')).toBeFalsy();
+  });
+
+  it('should detect empty or white space string', () => {
     expect(Str.isNullOrWhiteSpace('')).toBeTruthy();
     expect(Str.isNullOrWhiteSpace(Str.empty)).toBeTruthy();
     expect(Str.isNullOrWhiteSpace(' ')).toBeTruthy();
