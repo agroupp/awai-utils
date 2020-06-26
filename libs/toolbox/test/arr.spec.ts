@@ -14,6 +14,10 @@ describe('Getting array elements', () => {
   it('should return first element of the array', () => {
     expect(Arr.first([1, 2, 3, 4, 5])).toEqual(1);
   });
+
+  it('should return last element of the array', () => {
+    expect(Arr.last([1, 2, 3, 4, 5])).toEqual(5);
+  });
 });
 
 describe('Creating arrays', () => {
