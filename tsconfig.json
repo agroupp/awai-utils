@@ -15,7 +15,11 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@awai/toolbox": ["libs/toolbox/src/index.ts"],
+      "@awai/mongodb": ["libs/mongodb/src/index.ts"],
+      "@awai/validators": ["libs/validators/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

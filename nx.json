@@ -18,5 +18,15 @@
       }
     }
   },
-  "projects": {}
+  "projects": {
+    "toolbox": {
+      "tags": ["scope:public", "type:util"]
+    },
+    "mongodb": {
+      "tags": ["scope:public", "type:util"]
+    },
+    "validators": {
+      "tags": ["scope:public", "type:util", "target:angular"]
+    }
+  }
 }

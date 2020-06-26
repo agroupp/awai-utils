@@ -1,6 +1,116 @@
 {
   "version": 1,
-  "projects": {},
+  "projects": {
+    "toolbox": {
+      "root": "libs/toolbox",
+      "sourceRoot": "libs/toolbox/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": ["libs/toolbox/tsconfig.lib.json", "libs/toolbox/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "!libs/toolbox/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/toolbox/jest.config.js",
+            "tsConfig": "libs/toolbox/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        },
+        "build": {
+          "builder": "@nrwl/node:package",
+          "options": {
+            "outputPath": "dist/libs/toolbox",
+            "tsConfig": "libs/toolbox/tsconfig.lib.json",
+            "packageJson": "libs/toolbox/package.json",
+            "main": "libs/toolbox/src/index.ts",
+            "assets": ["libs/toolbox/*.md"]
+          }
+        }
+      }
+    },
+    "mongodb": {
+      "root": "libs/mongodb",
+      "sourceRoot": "libs/mongodb/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": ["libs/mongodb/tsconfig.lib.json", "libs/mongodb/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "!libs/mongodb/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/mongodb/jest.config.js",
+            "tsConfig": "libs/mongodb/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        },
+        "build": {
+          "builder": "@nrwl/node:package",
+          "options": {
+            "outputPath": "dist/libs/mongodb",
+            "tsConfig": "libs/mongodb/tsconfig.lib.json",
+            "packageJson": "libs/mongodb/package.json",
+            "main": "libs/mongodb/src/index.ts",
+            "assets": ["libs/mongodb/*.md"]
+          }
+        }
+      }
+    },
+    "validators": {
+      "projectType": "library",
+      "root": "libs/validators",
+      "sourceRoot": "libs/validators/src",
+      "prefix": "aw",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "tsConfig": "libs/validators/tsconfig.lib.json",
+            "project": "libs/validators/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/validators/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["libs/validators/tsconfig.lib.json", "libs/validators/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "!libs/validators/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/validators/jest.config.js",
+            "tsConfig": "libs/validators/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/validators/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
+    }
+  },
   "cli": {
     "defaultCollection": "@nrwl/workspace"
   },
