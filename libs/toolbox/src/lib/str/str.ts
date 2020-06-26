@@ -122,7 +122,7 @@ export class Str {
    */
   public static swapCase(str: string): string {
     if (Str.isNullOrWhiteSpace(str)) {
-      return str;
+      return Str.empty;
     }
     let result = Str.empty;
     for(let i = 0; i < str.length; i++) {

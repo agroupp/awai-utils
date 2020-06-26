@@ -1,7 +1,7 @@
-# toolbox
+# AWAI Toolbox
 
-This library was generated with [Nx](https://nx.dev).
+Set of tools.
 
 ## Running unit tests
 
-Run `ng test toolbox` to execute the unit tests via [Jest](https://jestjs.io).
+Run `nx test toolbox` to execute the unit tests via [Jest](https://jestjs.io).

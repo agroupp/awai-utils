@@ -13,7 +13,14 @@ describe('String manipulations', () => {
 
   it('should return empty string', () => expect(Str.isNullOrWhiteSpace(Str.empty)).toBeTruthy());
 
-  it('should capitalize first character in string', () => expect(Str.capitalize('abc')).toEqual('Abc'));
+  it('should return Ordered set of lowercase English letters', () => {
+    expect(Str.englishLettersOrdered).toEqual('abcdefghijklmnopqrstuvwxyz');
+  });
+
+  it('should capitalize first character in string', () => {
+    expect(Str.capitalize('abc')).toEqual('Abc');
+    expect(Str.capitalize(undefined)).toEqual(Str.empty);
+  });
 
   it('should check if all characters are in uppercase', () => {
     expect(Str.isUpper('AB C')).toBeTruthy();
@@ -25,7 +32,10 @@ describe('String manipulations', () => {
     expect(Str.isLower('AB dC')).toBeFalsy();
   });
 
-  it('should swap upper and lower case characters', () => expect(Str.swapCase('AbCdEf')).toEqual('aBcDeF'));
+  it('should swap upper and lower case characters', () => {
+    expect(Str.swapCase('AbCdEf')).toEqual('aBcDeF');
+    expect(Str.swapCase(undefined)).toEqual(Str.empty);
+  });
 
   it('should split the lines', () => {
     expect(Str.splitLines('ab c\n\nde fg\rkl\r\n')).toEqual(['ab c', '', 'de fg', 'kl']);
