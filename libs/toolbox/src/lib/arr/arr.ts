@@ -1,6 +1,6 @@
 /**
  * @license
- * Performed by Arthur Groupp
+ * Copyright Arthur Groupp
  *
  * Use of this source code is governed by an MIT-style license
  */
@@ -49,12 +49,28 @@ export class Arr {
     return result;
   }
 
+  /**
+   * Convert string into array of chars
+   * @param str
+   */
   public static stringToCharArray(str: string): Array<string> {
     if (Str.isNullOrEmpty(str)) {
       return [];
     }
     let result: string[] = str.split('');
     result = result.filter(c => c !== null && c !== undefined && c.length > 0);
+    return result;
+  }
+
+  /**
+   * Convert array of bytes into array of floats within range [0.0, 1.0]
+   * @param bytes
+   */
+  public static bytesToFloat(bytes: Uint8Array): Array<number> {
+    const result = [];
+    for(let i = 0; i < bytes.length; i++) {
+      result[i] = bytes[i] / 256;
+    }
     return result;
   }
 }

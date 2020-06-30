@@ -1,6 +1,6 @@
 /**
  * @license
- * Performed by Arthur Groupp
+ * Copyright Arthur Groupp
  *
  * Use of this source code is governed by an MIT-style license
  */
@@ -55,7 +55,7 @@ export class RandomBytesProvider {
    * Return array of random bytes.
    * @param size Number of bytes to generate
    */
-  public static nextBytesSync(size = 1): Uint8Array {
+  public static nextBytes(size = 1): Uint8Array {
     if (isBrowser()) {
         const arr = new Uint8Array(size);
         return window.crypto.getRandomValues(arr);

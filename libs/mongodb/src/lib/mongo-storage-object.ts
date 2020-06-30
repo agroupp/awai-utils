@@ -1,6 +1,6 @@
 /**
  * @license
- * Performed by Arthur Groupp
+ * Copyright Arthur Groupp
  *
  * Use of this source code is governed by an MIT-style license
  */

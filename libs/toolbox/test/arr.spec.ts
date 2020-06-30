@@ -36,4 +36,13 @@ describe('Creating arrays', () => {
     expect(Arr.stringToCharArray(null)).toEqual([]);
     expect(Arr.stringToCharArray(' ')).toEqual([' ']);
   });
+
+  it('should convert byte array to array with floats', () => {
+    const bytes = new Uint8Array(4);
+    bytes[0] = 16;
+    bytes[1] = 32;
+    bytes[2] = 64;
+    bytes[3] = 128;
+    expect(Arr.bytesToFloat(bytes)).toEqual([0.0625, 0.125, 0.25, 0.5]);
+  });
 });
