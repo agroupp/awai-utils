@@ -24,7 +24,8 @@
     "workspace-schematic": "nx workspace-schematic",
     "dep-graph": "nx dep-graph",
     "help": "nx help",
-    "test:all": "nx affected:test --all --codeCoverage --skip-nx-cache"
+    "test:all": "nx affected:test --all --codeCoverage --skip-nx-cache",
+    "build:toolbox:doc": "npx compodoc -p libs/toolbox/tsconfig.lib.json --theme Readthedocs -d dist/docs/toolbox"
   },
   "dependencies": {
     "mongodb": "^3.5.9",
@@ -34,6 +35,7 @@
     "@angular-devkit/build-angular": "~0.901.9",
     "@angular-devkit/build-ng-packagr": "~0.901.9",
     "@angular/compiler-cli": "~9.1.11",
+    "@compodoc/compodoc": "^1.1.11",
     "@nrwl/angular": "^9.4.5",
     "@nrwl/eslint-plugin-nx": "9.4.5",
     "@nrwl/jest": "9.4.5",
