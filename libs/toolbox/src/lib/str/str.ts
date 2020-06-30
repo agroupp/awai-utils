@@ -5,6 +5,8 @@
  * Use of this source code is governed by an MIT-style license
  */
 
+import { Arr } from '../arr';
+
 /**
  * A regular expression that matches valid e-mail addresses.
  *
@@ -148,5 +150,45 @@ export class Str {
       result.splice(result.length - 1, 1);
     }
     return result;
+  }
+
+  /**
+   * Return source text with "term" wrapped by specified HTML tag.
+   *
+   * @param str source text
+   * @param term text that must be wrapped
+   * @param tagName name of HTML tag
+   * @param tagClasses (optional) list of css classes of HTML tag
+   *
+   * Example:
+   * ```typescript
+   * const text = `who also wrote the majority opinion in the Texas Case, wrote the majority opinion here`;
+   * const result = Str.wrapInHtmlTag(text, 'majority', 'em', ['bold', 'italic']);
+   * ```
+   * The result will be:
+   *
+   * `who also wrote the <em class="bold italic">majority</em> opinion in the Texas Case, wrote the <em class="bold italic">majority</em> opinion here`
+   */
+  public static wrapInHtmlTag(str: string, term: string, tagName: string, tagClasses: string[] = null): string {
+    const termRegex = new RegExp(term, 'ig');
+    const matches = str.matchAll(termRegex);
+    let tag = `<${tagName}`;
+    if (!Arr.isNullOrEmpty(tagClasses)) {
+      tag += ` class="`;
+      for(let i = 0; i < tagClasses.length; i++) {
+        tag += `${tagClasses[i]}`;
+        tag += i < tagClasses.length - 1 ? ' ' : Str.empty;
+      }
+      tag += `"`;
+    }
+    tag += `>`;
+    const tagLength = tag.length + 3 + tagName.length;
+    let output = '';
+    for(const match of matches) {
+        output = output ? output.substr(0, match.index + tagLength) : match.input.substr(0, match.index);
+        output += `${tag}${match[0]}</${tagName}>`;
+        output += match.input.substr(match.index + match[0].length);
+    }
+    return output || str;
   }
 }

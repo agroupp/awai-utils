@@ -100,4 +100,19 @@ describe('String manipulations', () => {
     expect(Str.isDomainName('-domain.com')).toBeFalsy();
     expect(Str.isDomainName('domain.c')).toBeFalsy();
   });
+
+  it('should wrap part of text into html tag', () => {
+    const text = `who also wrote the majority opinion in the Texas Case, wrote the majority opinion here`;
+    expect(Str.wrapInHtmlTag(text, 'majority', 'em'))
+    .toEqual(`who also wrote the <em>majority</em> opinion in the Texas Case, wrote the <em>majority</em> opinion here`);
+
+    expect(Str.wrapInHtmlTag(text, 'majority', 'em', ['bold', 'italic']))
+    .toEqual(`who also wrote the <em class="bold italic">majority</em> opinion in the Texas Case, wrote the <em class="bold italic">majority</em> opinion here`);
+
+    expect(Str.wrapInHtmlTag(text, 'Texas Case', 'em'))
+    .toEqual(`who also wrote the majority opinion in the <em>Texas Case</em>, wrote the majority opinion here`);
+
+    expect(Str.wrapInHtmlTag(text, 'Texas Case', 'em', ['bold', 'italic']))
+    .toEqual(`who also wrote the majority opinion in the <em class="bold italic">Texas Case</em>, wrote the majority opinion here`);
+  });
 });
