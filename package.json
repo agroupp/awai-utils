@@ -1,6 +1,6 @@
 {
   "name": "awai",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "license": "MIT",
   "scripts": {
     "nx": "nx",
@@ -27,7 +27,8 @@
     "test:all": "nx affected:test --all --codeCoverage --skip-nx-cache",
     "docs": "npm run build:toolbox:doc && npm run build:mongodb:doc",
     "build:toolbox:doc": "npx compodoc -p libs/toolbox/tsconfig.lib.json -n toolbox -d docs/toolbox --hideGenerator",
-    "build:mongodb:doc": "npx compodoc -p libs/mongodb/tsconfig.lib.json -n mongodb -d docs/mongodb --hideGenerator"
+    "build:mongodb:doc": "npx compodoc -p libs/mongodb/tsconfig.lib.json -n mongodb -d docs/mongodb --hideGenerator",
+    "changelog": "conventional-changelog -i CHANGELOG.md -s"
   },
   "dependencies": {
     "mongodb": "^3.5.9",
@@ -69,6 +70,7 @@
   },
   "husky": {
     "hooks": {
+      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
      }
   },
