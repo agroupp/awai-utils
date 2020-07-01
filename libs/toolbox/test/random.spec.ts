@@ -55,8 +55,8 @@ describe('Generating random bytes by provider directly', () => {
       expect(bytes[i]).toBeGreaterThanOrEqual(0);
       expect(bytes[i]).toBeLessThanOrEqual(256);
     }
-    // Allowing of 1% of zeroes
-    expect(zeroes).toBeLessThan(10);
+    // Allowing of 2% of zeroes
+    expect(zeroes).toBeLessThan(20);
   });
 });
 

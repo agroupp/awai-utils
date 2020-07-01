@@ -101,6 +101,13 @@ describe('String manipulations', () => {
     expect(Str.isDomainName('domain.c')).toBeFalsy();
   });
 
+  it('should detect control character', () => {
+    expect(Str.isControl(String.fromCharCode(10))).toBeTruthy();
+    expect(Str.isControl(String.fromCharCode(27))).toBeTruthy();
+    expect(Str.isControl(' ')).toBeFalsy();
+    expect(Str.isControl('A')).toBeFalsy();
+  });
+
   it('should wrap part of text into html tag', () => {
     const text = `who also wrote the majority opinion in the Texas Case, wrote the majority opinion here`;
     expect(Str.wrapInHtmlTag(text, 'majority', 'em'))

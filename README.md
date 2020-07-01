@@ -3,5 +3,5 @@
 Set of libraries.
 
 ## Toolbox
+Set of tools you'll always need. So, just `npm install --save @awai/toolbox` and have it always at hand.
 
-* Str - Provides a set of helper methods for text processing.

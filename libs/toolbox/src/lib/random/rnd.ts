@@ -9,13 +9,14 @@ import { RandomBytesProvider } from './provider';
 import { Arr } from '../arr';
 
 /**
- * @description
  * Provides a set of helper methods to generate cryptographically
  * strong random values.
  */
 export class Rnd {
   /**
-   * Return a random floating-point number that is greater than or equal to 0.0, and less than 1.0.
+   * Return a random floating-point number or array of
+   * random floating-point numbers that is greater
+   * than or equal to 0.0, and less than 1.0
    * @param qty number of results to return
    */
   public static nextFloat(qty = 1): number | number[] {
@@ -24,7 +25,10 @@ export class Rnd {
   }
 
   /**
-   * Return async a random floating-point number that is greater than or equal to 0.0, and less than 1.0.
+   * Return a promise that resolves to random floating-point
+   * number or array of random floating-point
+   * numbers that is greater than or equal to 0.0, and less
+   * than 1.0
    * @param qty number of results to return
    */
   public static async nextFloatAsync(qty = 1): Promise<number | number[]> {
@@ -33,7 +37,8 @@ export class Rnd {
   }
 
   /**
-   * Return a random integer that is within a specified range.
+   * Return a random integer or array of random integers
+   * that is within a specified range
    * @param min lower bound of the random number returned
    * @param max upper bound of the random number returned. `max` must be greater than or equal to `min`
    * @param qty number of results to return
@@ -55,7 +60,9 @@ export class Rnd {
   }
 
   /**
-   * Return async a random integer that is within a specified range.
+   * Return a promise that resolves to random integer
+   * or array of random integers that is
+   * within a specified range
    * @param min lower bound of the random number returned
    * @param max upper bound of the random number returned. `max` must be greater than or equal to `min`
    * @param qty number of results to return

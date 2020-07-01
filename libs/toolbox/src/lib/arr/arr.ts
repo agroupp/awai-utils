@@ -8,13 +8,11 @@
 import { Str } from '../str';
 
 /**
- * @description
  * Provides a set of helper methods for arrays.
  */
 export class Arr {
-
   /**
-   * Return `true` if a specified array is null or empty.
+   * Return `true` if a specified array is null or empty
    * @param arr
    */
   public static isNullOrEmpty(arr: Array<unknown>): boolean {
@@ -22,7 +20,7 @@ export class Arr {
   }
 
   /**
-   * Return the first element of a specified array.
+   * Return the first element of a specified array
    * @param array
    */
   public static first<T>(arr: Array<T>): T | null {
@@ -30,7 +28,7 @@ export class Arr {
   }
 
   /**
-   * Return the last element of a specified array.
+   * Return the last element of a specified array
    * @param array
    */
   public static last<T>(arr: Array<T>): T | null {

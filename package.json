@@ -25,7 +25,9 @@
     "dep-graph": "nx dep-graph",
     "help": "nx help",
     "test:all": "nx affected:test --all --codeCoverage --skip-nx-cache",
-    "build:toolbox:doc": "npx compodoc -p libs/toolbox/tsconfig.lib.json --theme Readthedocs -d dist/docs/toolbox"
+    "docs": "npm run build:toolbox:doc && npm run build:mongodb:doc",
+    "build:toolbox:doc": "npx compodoc -p libs/toolbox/tsconfig.lib.json -n toolbox -d docs/toolbox --hideGenerator",
+    "build:mongodb:doc": "npx compodoc -p libs/mongodb/tsconfig.lib.json -n mongodb -d docs/mongodb --hideGenerator"
   },
   "dependencies": {
     "mongodb": "^3.5.9",
@@ -35,6 +37,8 @@
     "@angular-devkit/build-angular": "~0.901.9",
     "@angular-devkit/build-ng-packagr": "~0.901.9",
     "@angular/compiler-cli": "~9.1.11",
+    "@commitlint/cli": "^9.0.1",
+    "@commitlint/config-conventional": "^9.0.1",
     "@compodoc/compodoc": "^1.1.11",
     "@nrwl/angular": "^9.4.5",
     "@nrwl/eslint-plugin-nx": "9.4.5",
@@ -47,9 +51,12 @@
     "@types/node": "~14.0.14",
     "@typescript-eslint/eslint-plugin": "3.4.0",
     "@typescript-eslint/parser": "3.4.0",
+    "commitizen": "^4.1.2",
+    "cz-conventional-changelog": "^3.2.0",
     "dotenv": "8.2.0",
     "eslint": "7.3.1",
     "eslint-config-prettier": "6.11.0",
+    "husky": "^4.2.5",
     "jest": "26.1.0",
     "jest-preset-angular": "8.1.2",
     "mongodb-memory-server": "^6.6.1",
@@ -59,5 +66,15 @@
     "ts-node": "~8.10.2",
     "tslint": "~6.1.2",
     "typescript": "~3.9.5"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+     }
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
