@@ -6,6 +6,7 @@
  */
 
 import { Arr } from '../arr';
+import { Rnd } from '../random';
 
 /**
  * A regular expression that matches valid e-mail addresses.
@@ -33,6 +34,16 @@ const DOMAIN_NAME_REGEXP = /^([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}$/;
  * List of boundaries that mean "new line"
  */
 const NEW_LINE_BOUNDARIES: string[] = ['\r\n', '\r', '\n'];
+
+/**
+ * Regex to check if string is a number
+ */
+const DIGITS_ONLY_REGEX = /^[0-9]+$/;
+
+/**
+ * Regex to check if string is a number
+ */
+const ALPHA_ONLY_REGEX = /^[A-z]+$/;
 
 /**
  * Set of English alphbet as a string
@@ -93,6 +104,22 @@ export class Str {
       return false;
     }
     return char.charCodeAt(0) < 32;
+  }
+
+  /**
+   * Return `true` if all characters in the string are digits only
+   * @param str
+   */
+  public static isNumber(str: string): boolean {
+    return DIGITS_ONLY_REGEX.test(str);
+  }
+
+  /**
+   * Return `true` if all characters in the string are alpha only
+   * @param str
+   */
+  public static isAlpha(str: string): boolean {
+    return ALPHA_ONLY_REGEX.test(str);
   }
 
   /**
@@ -208,5 +235,28 @@ export class Str {
         output += match.input.substr(match.index + match[0].length);
     }
     return output || str;
+  }
+
+  /**
+   * Generate alpha numeric random sequence string
+   * @param size length of generated string
+   * @param alphaLower include lowercase characters
+   * @param alphaUpper include upercase characters
+   * @param decimal include digits
+   */
+  public static random(size = 8, alphaLower = true, alphaUpper = true, decimal = true): string {
+    let chars: string[] = [];
+    chars = alphaLower ? chars.concat(Arr.englishLettersOrdered) : chars;
+    chars = alphaUpper ? chars.concat(Arr.englishLettersUppercaseOrdered) : chars;
+    chars = decimal ? chars.concat(Arr.range(10, 0).map(d => d.toString())) : chars;
+    if (Arr.isNullOrEmpty(chars)) {
+      return Str.empty;
+    }
+    chars = Arr.shuffle(chars);
+    const result: string[] = [];
+    for(let i = 0; i < size; i++) {
+      result[i] = chars[Rnd.next(0, chars.length)];
+    }
+    return result.join('');
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "awai",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "license": "MIT",
   "scripts": {
     "nx": "nx",
@@ -26,8 +26,8 @@
     "help": "nx help",
     "test:all": "nx affected:test --all --codeCoverage --skip-nx-cache",
     "docs": "npm run build:toolbox:doc && npm run build:mongodb:doc",
-    "build:toolbox:doc": "npx compodoc -p libs/toolbox/tsconfig.lib.json -n toolbox -d docs/toolbox --hideGenerator",
-    "build:mongodb:doc": "npx compodoc -p libs/mongodb/tsconfig.lib.json -n mongodb -d docs/mongodb --hideGenerator",
+    "build:toolbox:doc": "compodoc -p libs/toolbox/tsconfig.lib.json -n toolbox -d docs/toolbox --hideGenerator",
+    "build:mongodb:doc": "compodoc -p libs/mongodb/tsconfig.lib.json -n mongodb -d docs/mongodb --hideGenerator",
     "changelog": "conventional-changelog -i CHANGELOG.md -s"
   },
   "dependencies": {

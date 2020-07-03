@@ -18,6 +18,13 @@ export class Arr {
   public static get englishLettersOrdered(): string[] { return Arr.stringToCharArray(Str.englishLettersOrdered); }
 
   /**
+   * Ordered set of upercase English letters
+   */
+  public static get englishLettersUppercaseOrdered(): string[] {
+    return Arr.stringToCharArray(Str.englishLettersOrdered.toUpperCase());
+  }
+
+  /**
    * Return `true` if a specified array is null or empty
    * @param arr
    */
@@ -81,7 +88,6 @@ export class Arr {
   /**
    * Shuffle the array by method Fisher–Yates
    *
-   * @credits
    * https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
    * @param arr array to shuffle
    */

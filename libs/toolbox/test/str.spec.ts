@@ -41,6 +41,16 @@ describe('String manipulations', () => {
     expect(Str.isLower('AB dC')).toBeFalsy();
   });
 
+  it('should check if all characters are digits', () => {
+    expect(Str.isNumber('123')).toBeTruthy();
+    expect(Str.isNumber('123a')).toBeFalsy();
+  });
+
+  it('should check if all characters are alphas', () => {
+    expect(Str.isAlpha('Abc')).toBeTruthy();
+    expect(Str.isAlpha('123a')).toBeFalsy();
+  });
+
   it('should swap upper and lower case characters', () => {
     expect(Str.swapCase('AbCdEf')).toEqual('aBcDeF');
     expect(Str.swapCase(undefined)).toEqual(Str.empty);
@@ -121,5 +131,19 @@ describe('String manipulations', () => {
 
     expect(Str.wrapInHtmlTag(text, 'Texas Case', 'em', ['bold', 'italic']))
     .toEqual(`who also wrote the majority opinion in the <em class="bold italic">Texas Case</em>, wrote the majority opinion here`);
+  });
+
+  it('should generate random alpha string', () => {
+    const full1 = Str.random();
+    const full2 = Str.random();
+    const alphaOnly = Str.random(10, true, true, false);
+    const decOnly = Str.random(10, false, false, true);
+    const alphaUpperDec = Str.random(10, false, true, true);
+    expect(full1).not.toEqual(full2);
+    expect(full1.length).toEqual(8);
+    expect(full2.length).toEqual(8);
+    expect(Str.isAlpha(alphaOnly)).toBeTruthy();
+    expect(Str.isNumber(decOnly)).toBeTruthy();
+    expect(Str.isUpper(alphaUpperDec)).toBeTruthy();
   });
 });
