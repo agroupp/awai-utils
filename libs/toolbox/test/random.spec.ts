@@ -109,6 +109,11 @@ describe('Generating random integers', () => {
       expect(value).toBeGreaterThanOrEqual(50);
       expect(value).toBeLessThanOrEqual(100);
     }
+    for(let i = 0; i < 100; i++) {
+      const value = Rnd.next(50, 100);
+      expect(value).toBeGreaterThanOrEqual(50);
+      expect(value).toBeLessThanOrEqual(100);
+    }
   });
 
   it('should generate random int between -50 and 50', () => {
@@ -127,6 +132,11 @@ describe('Generating random integers', () => {
   it('should async generate random int between 50 and 100', async () => {
     for(let i = 0; i < 100; i++) {
       const value = await Rnd.nextIntAsync(50, 100);
+      expect(value).toBeGreaterThanOrEqual(50);
+      expect(value).toBeLessThanOrEqual(100);
+    }
+    for(let i = 0; i < 100; i++) {
+      const value = await Rnd.nextAsync(50, 100);
       expect(value).toBeGreaterThanOrEqual(50);
       expect(value).toBeLessThanOrEqual(100);
     }

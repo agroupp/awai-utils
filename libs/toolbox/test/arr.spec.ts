@@ -1,4 +1,4 @@
-import { Arr } from '../src';
+import { Arr, Str } from '../src';
 
 const FILLED_ZERO_BASED_ARRAY: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 const FILLED_FIVE_BASED_ARRAY: number[] = [5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
@@ -44,5 +44,12 @@ describe('Creating arrays', () => {
     bytes[2] = 64;
     bytes[3] = 128;
     expect(Arr.bytesToFloat(bytes)).toEqual([0.0625, 0.125, 0.25, 0.5]);
+  });
+
+  it('should shuffle array', () => {
+    const shuffled = Arr.shuffle(Arr.englishLettersOrdered);
+    const shuffledSet = new Set(shuffled);
+    expect(shuffledSet.size).toEqual(Arr.englishLettersOrdered.length);
+    expect(shuffled).not.toEqual(Arr.englishLettersOrdered);
   });
 });

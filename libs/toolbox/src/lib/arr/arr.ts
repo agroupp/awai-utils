@@ -6,11 +6,17 @@
  */
 
 import { Str } from '../str';
+import { Rnd } from '../random';
 
 /**
  * Provides a set of helper methods for arrays.
  */
 export class Arr {
+  /**
+   * Ordered set of lowercase English letters
+   */
+  public static get englishLettersOrdered(): string[] { return Arr.stringToCharArray(Str.englishLettersOrdered); }
+
   /**
    * Return `true` if a specified array is null or empty
    * @param arr
@@ -68,6 +74,29 @@ export class Arr {
     const result = [];
     for(let i = 0; i < bytes.length; i++) {
       result[i] = bytes[i] / 256;
+    }
+    return result;
+  }
+
+  /**
+   * Shuffle the array by method Fisher–Yates
+   *
+   * @credits
+   * https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
+   * @param arr array to shuffle
+   */
+  public static shuffle<T>(arr: Array<T>): Array<T> {
+    if (Arr.isNullOrEmpty(arr)) {
+      return arr;
+    }
+    const result: Array<T> = arr.slice(0);
+    let n = result.length;
+    while (n > 1) {
+      const k = Rnd.next(0, n);
+      n--;
+      const temp = result[k];
+      result[k] = result[n];
+      result[n] = temp;
     }
     return result;
   }

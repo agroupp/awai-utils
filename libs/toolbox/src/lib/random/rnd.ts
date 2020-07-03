@@ -82,4 +82,27 @@ export class Rnd {
       return result;
     }
   }
+
+  /**
+   * Return a random integer that is within a specified range
+   * @param min lower bound of the random number returned
+   * @param max upper bound of the random number returned. `max` must be greater than or equal to `min`
+   *
+   * With no parameters it generates one integer within the range [0, 10]
+   */
+  public static next(min = 0, max = 10): number {
+    return Rnd.nextInt(min, max) as number;
+  }
+
+  /**
+   * Return a promise that resolves to random integer
+   * that is within a specified range
+   * @param min lower bound of the random number returned
+   * @param max upper bound of the random number returned. `max` must be greater than or equal to `min`
+   *
+   * With no parameters it generates one integer within the range [0, 10]
+   */
+  public static nextAsync(min = 0, max = 10): Promise<number> {
+    return Rnd.nextIntAsync(min, max) as Promise<number>;
+  }
 }
