@@ -3,8 +3,8 @@
 Set of libraries.
 
 
+[![agroupp](https://circleci.com/gh/agroupp/awai.svg?style=svg)](https://circleci.com/gh/agroupp/awai)
 [![Language](https://img.shields.io/github/languages/top/agroupp/awai)](https://img.shields.io/github/languages/top/agroupp/awai)
-
 [![Version](https://img.shields.io/github/package-json/v/agroupp/awai)](https://img.shields.io/github/package-json/v/agroupp/awai)
 
 
