@@ -154,7 +154,7 @@ export class Str {
    * @param str
    */
   public static isDomainName(str: string): boolean {
-    return !Str.isNullOrWhiteSpace(str) && DOMAIN_NAME_REGEXP.test(str);
+    return !Str.isNullOrWhiteSpace(str) && (!!str.match(/localhost/gi) || DOMAIN_NAME_REGEXP.test(str));
   }
 
   /**
@@ -255,8 +255,31 @@ export class Str {
     chars = Arr.shuffle(chars);
     const result: string[] = [];
     for(let i = 0; i < size; i++) {
-      result[i] = chars[Rnd.next(0, chars.length)];
+      result[i] = chars[Rnd.next(0, chars.length - 1)];
     }
     return result.join('');
+  }
+
+  /**
+   * Try to find number or boolean value in a provided string
+   * and return converted value
+   * @param str string to parse
+   */
+  public static parseNumBool(str: string): string | number | boolean {
+    if (Str.isNullOrWhiteSpace(str)) {
+      return str;
+    }
+    str = str.trim();
+    let result: string | number | boolean;
+    if (str.toLowerCase() === 'true') {
+      result = true;
+    } else if (str.toLowerCase() === 'false') {
+      result = false;
+    } else if (Str.isNumber(str) && !isNaN(+str)) {
+      result = +str;
+    } else {
+      result = str;
+    }
+    return result;
   }
 }

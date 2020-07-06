@@ -109,6 +109,7 @@ describe('String manipulations', () => {
     expect(Str.isDomainName('sub.domain.com')).toBeTruthy();
     expect(Str.isDomainName('-domain.com')).toBeFalsy();
     expect(Str.isDomainName('domain.c')).toBeFalsy();
+    expect(Str.isDomainName('localhost')).toBeTruthy();
   });
 
   it('should detect control character', () => {
@@ -145,5 +146,14 @@ describe('String manipulations', () => {
     expect(Str.isAlpha(alphaOnly)).toBeTruthy();
     expect(Str.isNumber(decOnly)).toBeTruthy();
     expect(Str.isUpper(alphaUpperDec)).toBeTruthy();
+  });
+
+  it('should return value converted to correct type', () => {
+    expect(Str.parseNumBool('25')).toEqual(25);
+    expect(Str.parseNumBool('true')).toEqual(true);
+    expect(Str.parseNumBool('True')).toEqual(true);
+    expect(Str.parseNumBool('False')).toEqual(false);
+    expect(Str.parseNumBool('TRUE ')).toEqual(true);
+    expect(Str.parseNumBool('abc')).toEqual('abc');
   });
 });

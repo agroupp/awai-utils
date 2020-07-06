@@ -1,3 +1,4 @@
+import { Url } from '@awai/toolbox';
 /**
  * @license
  * Copyright Arthur Groupp
@@ -53,12 +54,18 @@ export class MongoAdapter {
     return this._isReady;
   }
 
-  constructor(settings: MongoConnectionSettings) {
-    this._client = new MongoClient(settings.connectionString, {
+  constructor(settings: MongoConnectionSettings | string) {
+    const uri = typeof settings === 'string' ? settings : settings.connectionString;
+    this._client = new MongoClient(uri, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-    this._dbName = settings.dbName;
+    if (typeof settings === 'string') {
+      const url = new Url(settings);
+      this._dbName = url.pathParams && url.pathParams.length > 0 ? url.pathParams[0] : undefined;
+    } else {
+      this._dbName = settings.dbName;
+    }
   }
 
   /**

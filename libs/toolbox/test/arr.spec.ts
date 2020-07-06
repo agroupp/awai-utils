@@ -52,4 +52,9 @@ describe('Creating arrays', () => {
     expect(shuffledSet.size).toEqual(Arr.englishLettersOrdered.length);
     expect(shuffled).not.toEqual(Arr.englishLettersOrdered);
   });
+
+  it('should remove empty strings', () => {
+    const arr = ['a', '', 'b', 'c'];
+    expect(Arr.removeEmptyStrings(arr)).toEqual(['a', 'b', 'c']);
+  });
 });

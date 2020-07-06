@@ -5,12 +5,9 @@
  * Use of this source code is governed by an MIT-style license
  */
 
-import { Str } from '@awai/toolbox';
-
-const URL_PARSE_REGEX = /^(([^:/?#]+):)?(\/\/([^/?#]*))?([^?#]*)(\?([^#]*))?(#(.*))?/gi;
+import { Str, Url } from '@awai/toolbox';
 
 /**
- * @description
  * Class representing MongoDB server connection settings. Use
  * `MongoConnectionSettingsBuilder` to create an instance of this class.
  *
@@ -112,7 +109,6 @@ export class MongoConnectionSettings {
 }
 
 /**
- * @description
  * Initializes the new instance of `MongoConnectionSettings` class
  *
  * @example
@@ -286,45 +282,22 @@ export class MongoConnectionSettingsBuilder {
    * @param value
    */
   private parseConnectionString(value: string) {
-    value = value.trim();
-    const parsed = new RegExp(URL_PARSE_REGEX).exec(value);
-    if (!parsed || parsed.length < 10) {
-      throw new Error(`Error parsing connection string provided: ${value}`);
+    const url = new Url(value);
+    this._isDnsSeedlist = url.protocol.match(/\+srv/gi) ? true : false;
+    this._domain = url.domain;
+    if (url.port) {
+      this._domain += `:${url.port}`;
     }
-    const proto = parsed[2];
-    const domain = parsed[4];
-    const route = parsed[5];
-    const query = parsed[7];
-    this._isDnsSeedlist = proto.match(/\+srv/gi) ? true : false;
-    const domainSplitted = domain.split('@');
-    this._domain = domainSplitted.length === 2 ? domainSplitted[1] : domainSplitted[0];
-    if (domainSplitted.length > 1) {
-      const credentials = domainSplitted[0].split(':');
-      this._userName = credentials[0];
-      this._password = credentials[1];
+    if (url.username && url.password) {
+      this._userName = url.username;
+      this._password = url.password;
     }
-    this._dbName = route ? route.substring(1) : undefined;
-    if (query) {
-      const querySplitted = query.split('&');
-      let queryParams = new Map();
-      querySplitted
-        .map(q => q.split('='))
-        .map(q => {
-          if (!Str.isNullOrWhiteSpace(q[1]) && q[1].trim().toLowerCase() === 'true') {
-            return [q[0], true];
-          } else if (!Str.isNullOrWhiteSpace(q[1]) && q[1].trim().toLowerCase() === 'false') {
-            return [q[0], false];
-          } else {
-            return [q[0], q[1]];
-          }
-        })
-        .forEach(q => (queryParams = queryParams.set(q[0], q[1])));
-      if (queryParams.get('retryWrites')) {
-        this._isRetryWrites = queryParams.get('retryWrites');
-      }
-      if (queryParams.get('w')) {
-        this._writeConcern = queryParams.get('w');
-      }
+    this._dbName = url.pathParams && url.pathParams.length > 0 ? url.pathParams[0] : undefined;
+    if (url.queryParams.get('retryWrites')) {
+      this._isRetryWrites = url.queryParams.get('retryWrites') as boolean;
+    }
+    if (url.queryParams.get('w')) {
+      this._writeConcern = url.queryParams.get('w') as string | number;
     }
   }
 }

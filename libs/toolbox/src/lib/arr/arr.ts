@@ -106,4 +106,18 @@ export class Arr {
     }
     return result;
   }
+
+  /**
+   * Remove empty string elements from string array
+   * @param arr
+   */
+  public static removeEmptyStrings(arr: string[]): string[] {
+    const result: string[] = [];
+    for(let i = 0; i < arr.length; i++) {
+      if (!Str.isNullOrWhiteSpace(arr[i])) {
+        result.push(arr[i]);
+      }
+    }
+    return result;
+  }
 }

@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>mongodb</title>
+        <title>toolbox</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -13,7 +13,7 @@
     <body>
 
         <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="../" class="navbar-brand">mongodb</a>
+            <a href="../" class="navbar-brand">toolbox</a>
             <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
         </div>
 
@@ -42,7 +42,7 @@
 
 <ol class="breadcrumb">
   <li>Classes</li>
-  <li>MongoConnectionSettingsBuilder</li>
+  <li>Url</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -60,14 +60,17 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>libs/mongodb/src/lib/mongo-connection-settings.ts</code>
+            <code>libs/toolbox/src/lib/url/url.ts</code>
         </p>
 
             <p class="comment">
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>Initializes the new instance of <code>MongoConnectionSettings</code> class</p>
+                <p>The <code>Url</code> class is used to parse or create from 0 the <code>URL</code>. It gives
+you different property accessors that allow you easily access or
+set parts of the <code>URL</code>.
+Create the <code>Url</code> instance with the uri string or empty to construct it from zero.</p>
 
             </p>
 
@@ -78,18 +81,7 @@
             </p>
             <div class="io-description">
                         <div>
-                            <pre class="line-numbers"><code class="language-html">```typescript
- * const connSettingsBuilder = new MongoConnectionSettingsBuilder(connectionString);
- * connSettingsBuilder.collectionName = 'testColl1';
- * connSettings = connSettingsBuilder.toSettings();
- * ```
-
-Use connSettings to initialize repository class</code></pre>
-                        </div>
-                        <div>
-                            <pre class="line-numbers"><code class="language-html">```typescript
- * const repository = new TestRepository(connSettings)
- * ```</code></pre>
+                            <pre class="line-numbers"><code class="language-html">const url = new Url('https://tools.ietf.org/html/rfc3986#appendix-B');</code></pre>
                         </div>
             </div>
 
@@ -107,23 +99,11 @@ Use connSettings to initialize repository class</code></pre>
                         <ul class="index-list">
                             <li>
                                     <span class="modifier">Private</span>
-                                <a href="#_collectionName">_collectionName</a>
+                                <a href="#_domainName">_domainName</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
-                                <a href="#_dbName">_dbName</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#_domain">_domain</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#_isDnsSeedlist">_isDnsSeedlist</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#_isRetryWrites">_isRetryWrites</a>
+                                <a href="#_hash">_hash</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
@@ -131,11 +111,23 @@ Use connSettings to initialize repository class</code></pre>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
-                                <a href="#_userName">_userName</a>
+                                <a href="#_path">_path</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
-                                <a href="#_writeConcern">_writeConcern</a>
+                                <a href="#_port">_port</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#_query">_query</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#_scheme">_scheme</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#_username">_username</a>
                             </li>
                         </ul>
                     </td>
@@ -150,11 +142,20 @@ Use connSettings to initialize repository class</code></pre>
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#parseConnectionString">parseConnectionString</a>
+                                    <span class="modifier">Static</span>
+                                <a href="#isUrl">isUrl</a>
                             </li>
                             <li>
-                                <a href="#toSettings">toSettings</a>
+                                    <span class="modifier">Private</span>
+                                <a href="#splitDomainAndAuth">splitDomainAndAuth</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#toString">toString</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#toURL">toURL</a>
                             </li>
                         </ul>
                     </td>
@@ -173,31 +174,37 @@ Use connSettings to initialize repository class</code></pre>
                         <td class="col-md-4">
                             <ul class="index-list">
                                 <li>
-                                    <a href="#userName">userName</a>
-                                </li>
-                                <li>
-                                    <a href="#isPasswordSet">isPasswordSet</a>
-                                </li>
-                                <li>
-                                    <a href="#password">password</a>
+                                    <a href="#protocol">protocol</a>
                                 </li>
                                 <li>
                                     <a href="#domain">domain</a>
                                 </li>
                                 <li>
-                                    <a href="#dbName">dbName</a>
+                                    <a href="#port">port</a>
                                 </li>
                                 <li>
-                                    <a href="#isDnsSeedlist">isDnsSeedlist</a>
+                                    <a href="#username">username</a>
                                 </li>
                                 <li>
-                                    <a href="#writeConcern">writeConcern</a>
+                                    <a href="#password">password</a>
                                 </li>
                                 <li>
-                                    <a href="#isRetryWrites">isRetryWrites</a>
+                                    <a href="#pathString">pathString</a>
                                 </li>
                                 <li>
-                                    <a href="#collectionName">collectionName</a>
+                                    <a href="#pathParams">pathParams</a>
+                                </li>
+                                <li>
+                                    <a href="#path">path</a>
+                                </li>
+                                <li>
+                                    <a href="#queryParams">queryParams</a>
+                                </li>
+                                <li>
+                                    <a href="#hashFragment">hashFragment</a>
+                                </li>
+                                <li>
+                                    <a href="#isSsl">isSsl</a>
                                 </li>
                             </ul>
                         </td>
@@ -212,17 +219,19 @@ Use connSettings to initialize repository class</code></pre>
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(connectionString?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+<code>constructor(url?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="255" class="link-to-prism">libs/mongodb/src/lib/mongo-connection-settings.ts:255</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="208" class="link-to-prism">libs/toolbox/src/lib/url/url.ts:208</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Create the <code>Url</code> instance with the uri string or empty to construct it from zero.</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -231,11 +240,12 @@ Use connSettings to initialize repository class</code></pre>
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
                                                 <tr>
-                                                        <td>connectionString</td>
+                                                        <td>url</td>
                                                   
                                                         <td>
                                                                         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
@@ -245,9 +255,18 @@ Use connSettings to initialize repository class</code></pre>
                                                             Yes
                                                     </td>
                                                     
+                                                        <td>
+                                                                <code><p>standard <code>uri</code> string</p>
+</code>
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
+                                    <b>Example :</b>
+                                        <div>
+                                            <p>const url = new Url(&#39;<a href="https://tools.ietf.org/html/rfc3986#appendix-B&#39;">https://tools.ietf.org/html/rfc3986#appendix-B&#39;</a>);</p>
+
+                                        </div>
                             </div>
                     </td>
                 </tr>
@@ -264,12 +283,12 @@ Use connSettings to initialize repository class</code></pre>
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="_collectionName"></a>
+                        <a name="_domainName"></a>
                         <span class="name">
                             <b>
                                 <span class="modifier">Private</span>
-                            _collectionName</b>
-                            <a href="#_collectionName"><span class="icon ion-ios-link"></span></a>
+                            _domainName</b>
+                            <a href="#_domainName"><span class="icon ion-ios-link"></span></a>
                         </span>
                     </td>
                 </tr>
@@ -281,10 +300,16 @@ Use connSettings to initialize repository class</code></pre>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="241" class="link-to-prism">libs/mongodb/src/lib/mongo-connection-settings.ts:241</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">libs/toolbox/src/lib/url/url.ts:57</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Authority or name of domain</p>
+</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -292,12 +317,12 @@ Use connSettings to initialize repository class</code></pre>
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="_dbName"></a>
+                        <a name="_hash"></a>
                         <span class="name">
                             <b>
                                 <span class="modifier">Private</span>
-                            _dbName</b>
-                            <a href="#_dbName"><span class="icon ion-ios-link"></span></a>
+                            _hash</b>
+                            <a href="#_hash"><span class="icon ion-ios-link"></span></a>
                         </span>
                     </td>
                 </tr>
@@ -309,94 +334,16 @@ Use connSettings to initialize repository class</code></pre>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="177" class="link-to-prism">libs/mongodb/src/lib/mongo-connection-settings.ts:177</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="191" class="link-to-prism">libs/toolbox/src/lib/url/url.ts:191</a></div>
                             </td>
                         </tr>
 
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="_domain"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Private</span>
-                            _domain</b>
-                            <a href="#_domain"><span class="icon ion-ios-link"></span></a>
-                        </span>
+                        <div class="io-description"><p>Hash fragment</p>
+</div>
                     </td>
                 </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="161" class="link-to-prism">libs/mongodb/src/lib/mongo-connection-settings.ts:161</a></div>
-                            </td>
-                        </tr>
-
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="_isDnsSeedlist"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Private</span>
-                            _isDnsSeedlist</b>
-                            <a href="#_isDnsSeedlist"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
-
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="193" class="link-to-prism">libs/mongodb/src/lib/mongo-connection-settings.ts:193</a></div>
-                            </td>
-                        </tr>
-
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="_isRetryWrites"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Private</span>
-                            _isRetryWrites</b>
-                            <a href="#_isRetryWrites"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
-
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="225" class="link-to-prism">libs/mongodb/src/lib/mongo-connection-settings.ts:225</a></div>
-                            </td>
-                        </tr>
-
 
             </tbody>
         </table>
@@ -421,10 +368,16 @@ Use connSettings to initialize repository class</code></pre>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="145" class="link-to-prism">libs/mongodb/src/lib/mongo-connection-settings.ts:145</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="111" class="link-to-prism">libs/toolbox/src/lib/url/url.ts:111</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Password for HTTP Authentication</p>
+</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -432,12 +385,12 @@ Use connSettings to initialize repository class</code></pre>
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="_userName"></a>
+                        <a name="_path"></a>
                         <span class="name">
                             <b>
                                 <span class="modifier">Private</span>
-                            _userName</b>
-                            <a href="#_userName"><span class="icon ion-ios-link"></span></a>
+                            _path</b>
+                            <a href="#_path"><span class="icon ion-ios-link"></span></a>
                         </span>
                     </td>
                 </tr>
@@ -449,10 +402,16 @@ Use connSettings to initialize repository class</code></pre>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="129" class="link-to-prism">libs/mongodb/src/lib/mongo-connection-settings.ts:129</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="128" class="link-to-prism">libs/toolbox/src/lib/url/url.ts:128</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Route path in form <code>/route/path</code></p>
+</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -460,27 +419,135 @@ Use connSettings to initialize repository class</code></pre>
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="_writeConcern"></a>
+                        <a name="_port"></a>
                         <span class="name">
                             <b>
                                 <span class="modifier">Private</span>
-                            _writeConcern</b>
-                            <a href="#_writeConcern"><span class="icon ion-ios-link"></span></a>
+                            _port</b>
+                            <a href="#_port"><span class="icon ion-ios-link"></span></a>
                         </span>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Type : </i>    <code>string | number</code>
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
 
                         </td>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="209" class="link-to-prism">libs/mongodb/src/lib/mongo-connection-settings.ts:209</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="77" class="link-to-prism">libs/toolbox/src/lib/url/url.ts:77</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>IP port number</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="_query"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            _query</b>
+                            <a href="#_query"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="150" class="link-to-prism">libs/toolbox/src/lib/url/url.ts:150</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Query string</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="_scheme"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            _scheme</b>
+                            <a href="#_scheme"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">libs/toolbox/src/lib/url/url.ts:39</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>IANA-registered scheme</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="_username"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            _username</b>
+                            <a href="#_username"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="94" class="link-to-prism">libs/toolbox/src/lib/url/url.ts:94</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Username for HTTP Authentication</p>
+</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -495,35 +562,35 @@ Use connSettings to initialize repository class</code></pre>
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="parseConnectionString"></a>
+                    <a name="isUrl"></a>
                     <span class="name">
                         <b>
-                            <span class="modifier">Private</span>
-                            parseConnectionString
+                            <span class="modifier">Static</span>
+                            isUrl
                         </b>
-                        <a href="#parseConnectionString"><span class="icon ion-ios-link"></span></a>
+                        <a href="#isUrl"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>parseConnectionString(value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                    <code>isUrl(value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="284"
-                            class="link-to-prism">libs/mongodb/src/lib/mongo-connection-settings.ts:284</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="242"
+                            class="link-to-prism">libs/toolbox/src/lib/url/url.ts:242</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Parse connection string and retrieve all the params</p>
+                    <div class="io-description"><p>Return <code>true</code> if provided value can be parsed as valid URI</p>
 </div>
 
                     <div class="io-description">
@@ -534,6 +601,7 @@ Use connSettings to initialize repository class</code></pre>
                                     <td>Name</td>
                                     <td>Type</td>
                                     <td>Optional</td>
+                                    <td>Description</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -548,6 +616,90 @@ Use connSettings to initialize repository class</code></pre>
                                     </td>
 
 
+                                    <td>
+                                        <p>URI to test</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="splitDomainAndAuth"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Private</span>
+                            splitDomainAndAuth
+                        </b>
+                        <a href="#splitDomainAndAuth"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>splitDomainAndAuth(value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="285"
+                            class="link-to-prism">libs/toolbox/src/lib/url/url.ts:285</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Parse authority value to retrieve domain, port
+username and password</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>value</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <p>authority value</p>
+
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -569,38 +721,82 @@ Use connSettings to initialize repository class</code></pre>
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="toSettings"></a>
+                    <a name="toString"></a>
                     <span class="name">
                         <b>
-                            toSettings
+                            <span class="modifier">Public</span>
+                            toString
                         </b>
-                        <a href="#toSettings"><span class="icon ion-ios-link"></span></a>
+                        <a href="#toString"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>toSettings()</code>
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>toString()</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="267"
-                            class="link-to-prism">libs/mongodb/src/lib/mongo-connection-settings.ts:267</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="251"
+                            class="link-to-prism">libs/toolbox/src/lib/url/url.ts:251</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Return <code>MongoConnectionSettings</code> instance
-with all parameters set.</p>
+                    <div class="io-description"><p>Return string representation of the whole URL</p>
 </div>
 
                     <div class="io-description">
-                        <b>Returns : </b>        <code><a href="../classes/MongoConnectionSettings.html" target="_self" >MongoConnectionSettings</a></code>
+                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toURL"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            toURL
+                        </b>
+                        <a href="#toURL"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>toURL()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="276"
+                            class="link-to-prism">libs/toolbox/src/lib/url/url.ts:276</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Return <code>URL</code> object</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>URL</code>
 
                     </div>
                 </td>
@@ -621,24 +817,24 @@ with all parameters set.</p>
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="userName"></a>
-                        <span class="name"><b>userName</b><a href="#userName"><span class="icon ion-ios-link"></span></a></span>
+                        <a name="protocol"></a>
+                        <span class="name"><b>protocol</b><a href="#protocol"><span class="icon ion-ios-link"></span></a></span>
                     </td>
                 </tr>
 
                 <tr>
                     <td class="col-md-4">
-                        <span class="accessor"><b>get</b><code>userName()</code></span>
+                        <span class="accessor"><b>get</b><code>protocol()</code></span>
                     </td>
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="134" class="link-to-prism">libs/mongodb/src/lib/mongo-connection-settings.ts:134</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">libs/toolbox/src/lib/url/url.ts:44</a></div>
                                 </td>
                             </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-description"><p>Get user name</p>
+                                <div class="io-description"><p>IANA-registered scheme or protocol</p>
 </div>
 
                                 <div class="io-description">
@@ -650,111 +846,17 @@ with all parameters set.</p>
 
                 <tr>
                     <td class="col-md-4">
-                        <span class="accessor"><b>set</b><code>userName(value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code></span>
+                        <span class="accessor"><b>set</b><code>protocol(value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code></span>
                     </td>
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="141" class="link-to-prism">libs/mongodb/src/lib/mongo-connection-settings.ts:141</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">libs/toolbox/src/lib/url/url.ts:49</a></div>
                                 </td>
                             </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-description"><p>Set user name</p>
-</div>
-
-                                <div class="io-description">
-                                        <b>Parameters :</b>
-                                        <table class="params">
-                                            <thead>
-                                                <tr>
-                                                    <td>Name</td>
-                                                        <td>Type</td>
-                                                    <td>Optional</td>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                    <tr>
-                                                            <td>value</td>
-                                                    
-                                                            <td>
-                                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                                            </td>
-                                                    
-                                                        <td>
-                                                                No
-                                                        </td>
-                                                        
-                                                    </tr>
-                                            </tbody>
-                                        </table>
-                                </div>
-                                <div>
-                                </div>
-                                <div class="io-description">
-                                    <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                                </div>
-                        </td>
-                    </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="isPasswordSet"></a>
-                        <span class="name"><b>isPasswordSet</b><a href="#isPasswordSet"><span class="icon ion-ios-link"></span></a></span>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <span class="accessor"><b>get</b><code>isPasswordSet()</code></span>
-                    </td>
-                </tr>
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="150" class="link-to-prism">libs/mongodb/src/lib/mongo-connection-settings.ts:150</a></div>
-                                </td>
-                            </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-description"><p>Return <code>true</code> if password set</p>
-</div>
-
-                                <div class="io-description">
-                                    <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
-
-                                </div>
-                        </td>
-                    </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="password"></a>
-                        <span class="name"><b>password</b><a href="#password"><span class="icon ion-ios-link"></span></a></span>
-                    </td>
-                </tr>
-
-
-                <tr>
-                    <td class="col-md-4">
-                        <span class="accessor"><b>set</b><code>password(value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code></span>
-                    </td>
-                </tr>
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="157" class="link-to-prism">libs/mongodb/src/lib/mongo-connection-settings.ts:157</a></div>
-                                </td>
-                            </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-description"><p>Set password</p>
+                                <div class="io-description"><p>IANA-registered scheme or protocol</p>
 </div>
 
                                 <div class="io-description">
@@ -809,12 +911,12 @@ with all parameters set.</p>
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="166" class="link-to-prism">libs/mongodb/src/lib/mongo-connection-settings.ts:166</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">libs/toolbox/src/lib/url/url.ts:62</a></div>
                                 </td>
                             </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-description"><p>Get domain name</p>
+                                <div class="io-description"><p>Name of the domain or IP address</p>
 </div>
 
                                 <div class="io-description">
@@ -831,12 +933,12 @@ with all parameters set.</p>
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="173" class="link-to-prism">libs/mongodb/src/lib/mongo-connection-settings.ts:173</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">libs/toolbox/src/lib/url/url.ts:67</a></div>
                                 </td>
                             </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-description"><p>Set domain name</p>
+                                <div class="io-description"><p>Name of the domain or IP address</p>
 </div>
 
                                 <div class="io-description">
@@ -879,24 +981,106 @@ with all parameters set.</p>
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="dbName"></a>
-                        <span class="name"><b>dbName</b><a href="#dbName"><span class="icon ion-ios-link"></span></a></span>
+                        <a name="port"></a>
+                        <span class="name"><b>port</b><a href="#port"><span class="icon ion-ios-link"></span></a></span>
                     </td>
                 </tr>
 
                 <tr>
                     <td class="col-md-4">
-                        <span class="accessor"><b>get</b><code>dbName()</code></span>
+                        <span class="accessor"><b>get</b><code>port()</code></span>
                     </td>
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="182" class="link-to-prism">libs/mongodb/src/lib/mongo-connection-settings.ts:182</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="82" class="link-to-prism">libs/toolbox/src/lib/url/url.ts:82</a></div>
                                 </td>
                             </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-description"><p>Get database name</p>
+                                <div class="io-description"><p>IP port number</p>
+</div>
+
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>set</b><code>port(value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="87" class="link-to-prism">libs/toolbox/src/lib/url/url.ts:87</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>IP port number</p>
+</div>
+
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <table class="params">
+                                            <thead>
+                                                <tr>
+                                                    <td>Name</td>
+                                                        <td>Type</td>
+                                                    <td>Optional</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr>
+                                                            <td>value</td>
+                                                    
+                                                            <td>
+                                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                                            </td>
+                                                    
+                                                        <td>
+                                                                No
+                                                        </td>
+                                                        
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                </div>
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="username"></a>
+                        <span class="name"><b>username</b><a href="#username"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>username()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="99" class="link-to-prism">libs/toolbox/src/lib/url/url.ts:99</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Username for HTTP Authentication</p>
 </div>
 
                                 <div class="io-description">
@@ -908,17 +1092,17 @@ with all parameters set.</p>
 
                 <tr>
                     <td class="col-md-4">
-                        <span class="accessor"><b>set</b><code>dbName(value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code></span>
+                        <span class="accessor"><b>set</b><code>username(value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code></span>
                     </td>
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="189" class="link-to-prism">libs/mongodb/src/lib/mongo-connection-settings.ts:189</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="104" class="link-to-prism">libs/toolbox/src/lib/url/url.ts:104</a></div>
                                 </td>
                             </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-description"><p>Set database name</p>
+                                <div class="io-description"><p>Username for HTTP Authentication</p>
 </div>
 
                                 <div class="io-description">
@@ -961,266 +1145,24 @@ with all parameters set.</p>
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="isDnsSeedlist"></a>
-                        <span class="name"><b>isDnsSeedlist</b><a href="#isDnsSeedlist"><span class="icon ion-ios-link"></span></a></span>
+                        <a name="password"></a>
+                        <span class="name"><b>password</b><a href="#password"><span class="icon ion-ios-link"></span></a></span>
                     </td>
                 </tr>
 
                 <tr>
                     <td class="col-md-4">
-                        <span class="accessor"><b>get</b><code>isDnsSeedlist()</code></span>
+                        <span class="accessor"><b>get</b><code>password()</code></span>
                     </td>
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="198" class="link-to-prism">libs/mongodb/src/lib/mongo-connection-settings.ts:198</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="116" class="link-to-prism">libs/toolbox/src/lib/url/url.ts:116</a></div>
                                 </td>
                             </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-description"><p>Get DNS speed list parameter</p>
-</div>
-
-                                <div class="io-description">
-                                    <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
-
-                                </div>
-                        </td>
-                    </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <span class="accessor"><b>set</b><code>isDnsSeedlist(value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code></span>
-                    </td>
-                </tr>
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="205" class="link-to-prism">libs/mongodb/src/lib/mongo-connection-settings.ts:205</a></div>
-                                </td>
-                            </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-description"><p>Set DNS speed list parameter</p>
-</div>
-
-                                <div class="io-description">
-                                        <b>Parameters :</b>
-                                        <table class="params">
-                                            <thead>
-                                                <tr>
-                                                    <td>Name</td>
-                                                        <td>Type</td>
-                                                    <td>Optional</td>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                    <tr>
-                                                            <td>value</td>
-                                                    
-                                                            <td>
-                                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
-                                                            </td>
-                                                    
-                                                        <td>
-                                                                No
-                                                        </td>
-                                                        
-                                                    </tr>
-                                            </tbody>
-                                        </table>
-                                </div>
-                                <div>
-                                </div>
-                                <div class="io-description">
-                                    <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                                </div>
-                        </td>
-                    </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="writeConcern"></a>
-                        <span class="name"><b>writeConcern</b><a href="#writeConcern"><span class="icon ion-ios-link"></span></a></span>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <span class="accessor"><b>get</b><code>writeConcern()</code></span>
-                    </td>
-                </tr>
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="214" class="link-to-prism">libs/mongodb/src/lib/mongo-connection-settings.ts:214</a></div>
-                                </td>
-                            </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-description"><p>Get write concern parameter</p>
-</div>
-
-                                <div class="io-description">
-                                    <b>Returns : </b>    <code>string | number</code>
-
-                                </div>
-                        </td>
-                    </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <span class="accessor"><b>set</b><code>writeConcern(value)</code></span>
-                    </td>
-                </tr>
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="221" class="link-to-prism">libs/mongodb/src/lib/mongo-connection-settings.ts:221</a></div>
-                                </td>
-                            </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-description"><p>Set write concern parameter</p>
-</div>
-
-                                <div class="io-description">
-                                        <b>Parameters :</b>
-                                        <table class="params">
-                                            <thead>
-                                                <tr>
-                                                    <td>Name</td>
-                                                    <td>Optional</td>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                    <tr>
-                                                            <td>value</td>
-                                                    
-                                                    
-                                                        <td>
-                                                                No
-                                                        </td>
-                                                        
-                                                    </tr>
-                                            </tbody>
-                                        </table>
-                                </div>
-                                <div>
-                                </div>
-                                <div class="io-description">
-                                    <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                                </div>
-                        </td>
-                    </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="isRetryWrites"></a>
-                        <span class="name"><b>isRetryWrites</b><a href="#isRetryWrites"><span class="icon ion-ios-link"></span></a></span>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <span class="accessor"><b>get</b><code>isRetryWrites()</code></span>
-                    </td>
-                </tr>
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="230" class="link-to-prism">libs/mongodb/src/lib/mongo-connection-settings.ts:230</a></div>
-                                </td>
-                            </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-description"><p>Get retry writes parameter</p>
-</div>
-
-                                <div class="io-description">
-                                    <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
-
-                                </div>
-                        </td>
-                    </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <span class="accessor"><b>set</b><code>isRetryWrites(value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code></span>
-                    </td>
-                </tr>
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="237" class="link-to-prism">libs/mongodb/src/lib/mongo-connection-settings.ts:237</a></div>
-                                </td>
-                            </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-description"><p>Set retry writes parameter</p>
-</div>
-
-                                <div class="io-description">
-                                        <b>Parameters :</b>
-                                        <table class="params">
-                                            <thead>
-                                                <tr>
-                                                    <td>Name</td>
-                                                        <td>Type</td>
-                                                    <td>Optional</td>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                    <tr>
-                                                            <td>value</td>
-                                                    
-                                                            <td>
-                                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
-                                                            </td>
-                                                    
-                                                        <td>
-                                                                No
-                                                        </td>
-                                                        
-                                                    </tr>
-                                            </tbody>
-                                        </table>
-                                </div>
-                                <div>
-                                </div>
-                                <div class="io-description">
-                                    <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                                </div>
-                        </td>
-                    </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="collectionName"></a>
-                        <span class="name"><b>collectionName</b><a href="#collectionName"><span class="icon ion-ios-link"></span></a></span>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <span class="accessor"><b>get</b><code>collectionName()</code></span>
-                    </td>
-                </tr>
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="246" class="link-to-prism">libs/mongodb/src/lib/mongo-connection-settings.ts:246</a></div>
-                                </td>
-                            </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-description"><p>Get the name of the collection</p>
+                                <div class="io-description"><p>Password for HTTP Authentication</p>
 </div>
 
                                 <div class="io-description">
@@ -1232,17 +1174,17 @@ with all parameters set.</p>
 
                 <tr>
                     <td class="col-md-4">
-                        <span class="accessor"><b>set</b><code>collectionName(value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code></span>
+                        <span class="accessor"><b>set</b><code>password(value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code></span>
                     </td>
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="253" class="link-to-prism">libs/mongodb/src/lib/mongo-connection-settings.ts:253</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="121" class="link-to-prism">libs/toolbox/src/lib/url/url.ts:121</a></div>
                                 </td>
                             </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-description"><p>Set the name of the collection</p>
+                                <div class="io-description"><p>Password for HTTP Authentication</p>
 </div>
 
                                 <div class="io-description">
@@ -1279,6 +1221,331 @@ with all parameters set.</p>
                                 </div>
                         </td>
                     </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="pathString"></a>
+                        <span class="name"><b>pathString</b><a href="#pathString"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>pathString()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="133" class="link-to-prism">libs/toolbox/src/lib/url/url.ts:133</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Route path in form <code>/route/path</code></p>
+</div>
+
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="pathParams"></a>
+                        <span class="name"><b>pathParams</b><a href="#pathParams"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>pathParams()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="138" class="link-to-prism">libs/toolbox/src/lib/url/url.ts:138</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Route path as array of its parts</p>
+</div>
+
+                                <div class="io-description">
+                                    <b>Returns : </b>    <code>string[]</code>
+
+                                </div>
+                        </td>
+                    </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="path"></a>
+                        <span class="name"><b>path</b><a href="#path"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>set</b><code>path(value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="143" class="link-to-prism">libs/toolbox/src/lib/url/url.ts:143</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Route path in form <code>/route/path</code></p>
+</div>
+
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <table class="params">
+                                            <thead>
+                                                <tr>
+                                                    <td>Name</td>
+                                                        <td>Type</td>
+                                                    <td>Optional</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr>
+                                                            <td>value</td>
+                                                    
+                                                            <td>
+                                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                            </td>
+                                                    
+                                                        <td>
+                                                                No
+                                                        </td>
+                                                        
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                </div>
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="queryParams"></a>
+                        <span class="name"><b>queryParams</b><a href="#queryParams"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>queryParams()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="156" class="link-to-prism">libs/toolbox/src/lib/url/url.ts:156</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Map of query params as a key - value. Values are
+parsed as strings, numbers and booleans</p>
+</div>
+
+                                <div class="io-description">
+                                    <b>Returns : </b>    <code>Map&lt;string, string | number | boolean&gt;</code>
+
+                                </div>
+                        </td>
+                    </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>set</b><code>queryParams(value)</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="179" class="link-to-prism">libs/toolbox/src/lib/url/url.ts:179</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Map of query params as a key - value</p>
+</div>
+
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <table class="params">
+                                            <thead>
+                                                <tr>
+                                                    <td>Name</td>
+                                                    <td>Optional</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr>
+                                                            <td>value</td>
+                                                    
+                                                    
+                                                        <td>
+                                                                No
+                                                        </td>
+                                                        
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                </div>
+                                <div>
+                                        <b>Example :</b>
+                                            <div>
+                                                <pre class="line-numbers"><code class="language-html">url.queryParams = new Map().set(&amp;#39;retryWrites&amp;#39;, true).set(&amp;#39;w&amp;#39;, &amp;#39;majority&amp;#39;);</code></pre>
+                                            </div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="hashFragment"></a>
+                        <span class="name"><b>hashFragment</b><a href="#hashFragment"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>hashFragment()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="196" class="link-to-prism">libs/toolbox/src/lib/url/url.ts:196</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Hash fragment</p>
+</div>
+
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>set</b><code>hashFragment(value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="201" class="link-to-prism">libs/toolbox/src/lib/url/url.ts:201</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Hash fragment</p>
+</div>
+
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <table class="params">
+                                            <thead>
+                                                <tr>
+                                                    <td>Name</td>
+                                                        <td>Type</td>
+                                                    <td>Optional</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr>
+                                                            <td>value</td>
+                                                    
+                                                            <td>
+                                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                            </td>
+                                                    
+                                                        <td>
+                                                                No
+                                                        </td>
+                                                        
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                </div>
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="isSsl"></a>
+                        <span class="name"><b>isSsl</b><a href="#isSsl"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>isSsl()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="208" class="link-to-prism">libs/toolbox/src/lib/url/url.ts:208</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Return <code>true</code> if SSL is used</p>
+</div>
+
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+
             </tbody>
         </table>
 </section>
@@ -1286,299 +1553,295 @@ with all parameters set.</p>
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Str, Url } from &#x27;@awai/toolbox&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Str } from &#x27;../str&#x27;;
+import { Arr } from &#x27;../arr&#x27;;
 
 /**
- * Class representing MongoDB server connection settings. Use
- * &#x60;MongoConnectionSettingsBuilder&#x60; to create an instance of this class.
- *
- * Use connection settings to initialize repository class
- *
- * @example
- * &#x60;&#x60;&#x60;typescript
- * const repository &#x3D; new TestRepository(connSettings)
- * &#x60;&#x60;&#x60;
- *
- * @see &#x60;MongoConnectionSettingsBuilder&#x60;
+ * URI reference parsing regular expression
+ * From RFC 3986 https://tools.ietf.org/html/rfc3986#appendix-B
  */
-export class MongoConnectionSettings {
-  private readonly _userName: string;
-  private readonly _password: string;
-  private readonly _domain: string;
-  private readonly _dbName: string;
-
-  /**
-   * Get database name
-   */
-  get dbName(): string {
-    return this._dbName;
-  }
-
-  private _isDnsSeedlist: boolean;
-
-  /**
-   * Set DNS speed list parameter
-   */
-  set isDnsSeedlist(value: boolean) {
-    this._isDnsSeedlist &#x3D; value;
-  }
-
-  private _writeConcern: string | number;
-
-  /**
-   * Set write concern parameter
-   */
-  set writeConcern(value: string | number) {
-    this._writeConcern &#x3D; value;
-  }
-
-  private _isRetryWrites: boolean;
-
-  /**
-   * Set retry writes parameter
-   */
-  set isRetryWrites(value: boolean) {
-    this._isRetryWrites &#x3D; value;
-  }
-
-  private readonly _collectionName: string;
-
-  /**
-   * Get the name of the collection
-   */
-  get collectionName(): string {
-    return this._collectionName;
-  }
-
-  /**
-   * Get MongoDB connection string
-   */
-  get connectionString(): string {
-    let str &#x3D; &#x60;mongodb&#x60;;
-    str +&#x3D; this._isDnsSeedlist ? &#x27;+srv&#x27; : Str.empty;
-    str +&#x3D; &#x27;://&#x27;;
-    str +&#x3D; this._userName &amp;&amp; this._password ? &#x60;${this._userName}:${this._password}@&#x60; : Str.empty;
-    str +&#x3D; this._domain;
-    str +&#x3D; this._dbName ? &#x60;/${this._dbName}&#x60; : Str.empty;
-    str +&#x3D; &#x60;?retryWrites&#x3D;${this._isRetryWrites}&amp;w&#x3D;${this._writeConcern}&#x60;;
-    return str;
-  }
-
-  constructor(
-    userName: string,
-    password: string,
-    domain: string,
-    dbName &#x3D; &#x27;test&#x27;,
-    isDnsSeedlist &#x3D; false,
-    writeConcern: string | number &#x3D; &#x27;majority&#x27;,
-    isRetryWrites &#x3D; true,
-    collectionName?: string
-  ) {
-    this._userName &#x3D; userName;
-    this._password &#x3D; password;
-    this._domain &#x3D; domain;
-    this._dbName &#x3D; dbName;
-    this._isDnsSeedlist &#x3D; isDnsSeedlist;
-    this._writeConcern &#x3D; writeConcern;
-    this._isRetryWrites &#x3D; isRetryWrites;
-    this._collectionName &#x3D; collectionName;
-  }
-
-  toString(): string {
-    return this.connectionString;
-  }
-}
+const URI_PARSE_REGEX &#x3D; /^(([^:/?#]+):)?(\/\/([^/?#]*))?([^?#]*)(\?([^#]*))?(#(.*))?/;
 
 /**
- * Initializes the new instance of &#x60;MongoConnectionSettings&#x60; class
- *
- * @example
- * &#x60;&#x60;&#x60;typescript
- * const connSettingsBuilder &#x3D; new MongoConnectionSettingsBuilder(connectionString);
- * connSettingsBuilder.collectionName &#x3D; &#x27;testColl1&#x27;;
- * connSettings &#x3D; connSettingsBuilder.toSettings();
- * &#x60;&#x60;&#x60;
- *
- * Use connSettings to initialize repository class
- *
- * @example
- * &#x60;&#x60;&#x60;typescript
- * const repository &#x3D; new TestRepository(connSettings)
- * &#x60;&#x60;&#x60;
+ * Check if value includes URI scheme (like http:, https:)
  */
-export class MongoConnectionSettingsBuilder {
-  private _userName: string;
+const URI_SCHEME_VALIDATOR &#x3D; /^([^:/?#]+):/;
+
+/**
+ * The &#x60;Url&#x60; class is used to parse or create from 0 the &#x60;URL&#x60;. It gives
+ * you different property accessors that allow you easily access or
+ * set parts of the &#x60;URL&#x60;.
+ * Create the &#x60;Url&#x60; instance with the uri string or empty to construct it from zero.
+ *
+ * @example
+ *
+ * const url &#x3D; new Url(&#x27;https://tools.ietf.org/html/rfc3986#appendix-B&#x27;);
+ *
+ *
+ */
+export class Url {
 
   /**
-   * Get user name
+   * IANA-registered scheme
    */
-  get userName(): string {
-    return this._userName;
+  private _scheme: string;
+
+  /**
+   * IANA-registered scheme or protocol
+   */
+  get protocol(): string { return this._scheme; }
+
+  /**
+   * IANA-registered scheme or protocol
+   */
+  set protocol(value: string) {
+    // TODO: Check for correct sheme https://en.wikipedia.org/wiki/List_of_URI_schemes
+    this._scheme &#x3D; value;
   }
 
   /**
-   * Set user name
+   * Authority or name of domain
    */
-  set userName(value: string) {
-    this._userName &#x3D; value;
+  private _domainName: string;
+
+  /**
+   * Name of the domain or IP address
+   */
+  get domain(): string { return this._domainName; }
+
+  /**
+   * Name of the domain or IP address
+   */
+  set domain(value: string) {
+    if (!Str.isDomainName(value) &amp;&amp; !Str.isIp(value)) {
+      throw new Error(&#x27;Not valid domain name&#x27;);
+    }
+    this._domainName &#x3D; value;
   }
 
+  /**
+   * IP port number
+   */
+  private _port: number;
+
+  /**
+   * IP port number
+   */
+  get port(): number { return this._port; }
+
+  /**
+   * IP port number
+   */
+  set port(value: number) {
+    this._port &#x3D; value;
+  }
+
+  /**
+   * Username for HTTP Authentication
+   */
+  private _username: string;
+
+  /**
+   * Username for HTTP Authentication
+   */
+  get username(): string { return this._username; }
+
+  /**
+   * Username for HTTP Authentication
+   */
+  set username(value: string) {
+    this._username &#x3D; value;
+  }
+
+  /**
+   * Password for HTTP Authentication
+   */
   private _password: string;
 
   /**
-   * Return &#x60;true&#x60; if password set
+   * Password for HTTP Authentication
    */
-  get isPasswordSet(): boolean {
-    return Str.isNullOrWhiteSpace(this._password) ? false : true;
-  }
+  get password(): string { return this._password; }
 
   /**
-   * Set password
+   * Password for HTTP Authentication
    */
   set password(value: string) {
     this._password &#x3D; value;
   }
 
-  private _domain: string;
+  /**
+   * Route path in form &#x60;/route/path&#x60;
+   */
+  private _path: string;
 
   /**
-   * Get domain name
+   * Route path in form &#x60;/route/path&#x60;
    */
-  get domain(): string {
-    return this._domain;
+  get pathString(): string { return this._path; }
+
+  /**
+   * Route path as array of its parts
+   */
+  get pathParams(): string[] { return Arr.removeEmptyStrings(this._path.split(&#x27;/&#x27;)); }
+
+  /**
+   * Route path in form &#x60;/route/path&#x60;
+   */
+  set path(value: string) {
+    this._path &#x3D; value;
   }
 
   /**
-   * Set domain name
+   * Query string
    */
-  set domain(value: string) {
-    this._domain &#x3D; value;
-  }
-
-  private _dbName: string;
+  private _query: string;
 
   /**
-   * Get database name
+   * Map of query params as a key - value. Values are
+   * parsed as strings, numbers and booleans
    */
-  get dbName(): string {
-    return this._dbName;
-  }
-
-  /**
-   * Set database name
-   */
-  set dbName(value: string) {
-    this._dbName &#x3D; value;
-  }
-
-  private _isDnsSeedlist: boolean;
-
-  /**
-   * Get DNS speed list parameter
-   */
-  get isDnsSeedlist(): boolean {
-    return this._isDnsSeedlist;
-  }
-
-  /**
-   * Set DNS speed list parameter
-   */
-  set isDnsSeedlist(value: boolean) {
-    this._isDnsSeedlist &#x3D; value;
-  }
-
-  private _writeConcern: string | number;
-
-  /**
-   * Get write concern parameter
-   */
-  get writeConcern(): string | number {
-    return this._writeConcern;
-  }
-
-  /**
-   * Set write concern parameter
-   */
-  set writeConcern(value: string | number) {
-    this._writeConcern &#x3D; value;
-  }
-
-  private _isRetryWrites: boolean;
-
-  /**
-   * Get retry writes parameter
-   */
-  get isRetryWrites(): boolean {
-    return this._isRetryWrites;
-  }
-
-  /**
-   * Set retry writes parameter
-   */
-  set isRetryWrites(value: boolean) {
-    this._isRetryWrites &#x3D; value;
-  }
-
-  private _collectionName: string;
-
-  /**
-   * Get the name of the collection
-   */
-  get collectionName(): string {
-    return this._collectionName;
-  }
-
-  /**
-   * Set the name of the collection
-   */
-  set collectionName(value: string) {
-    this._collectionName &#x3D; value;
-  }
-
-  constructor(connectionString?: string) {
-    if (!Str.isNullOrWhiteSpace(connectionString)) {
-      this.parseConnectionString(connectionString);
+  get queryParams(): Map&lt;string, string | number | boolean&gt; {
+    if (Str.isNullOrWhiteSpace(this._query)) {
+      return new Map();
     }
+    const q &#x3D; this._query.replace(&#x27;?&#x27;, Str.empty);
+    const querySplitted &#x3D; Arr.removeEmptyStrings(q.split(&#x27;&amp;&#x27;));
+    if (!querySplitted || querySplitted.length &#x3D;&#x3D;&#x3D; 0) {
+      return new Map();
+    }
+    let result &#x3D; new Map&lt;string, string | number | boolean&gt;();
+    for (let i &#x3D; 0; i &lt; querySplitted.length; i++) {
+      const item &#x3D; querySplitted[i].split(&#x27;&#x3D;&#x27;);
+      result &#x3D; result.set(item[0].trim(), item.length &gt; 1 ? Str.parseNumBool(item[1]) : Str.empty);
+    }
+    return result;
   }
 
   /**
-   * Return &#x60;MongoConnectionSettings&#x60; instance
-   * with all parameters set.
+   * Map of query params as a key - value
+   *
+   * @example
+   * url.queryParams &#x3D; new Map().set(&#x27;retryWrites&#x27;, true).set(&#x27;w&#x27;, &#x27;majority&#x27;);
    */
-  toSettings(): MongoConnectionSettings {
-    return new MongoConnectionSettings(
-      this._userName,
-      this._password,
-      this._domain,
-      this._dbName,
-      this._isDnsSeedlist,
-      this._writeConcern,
-      this._isRetryWrites,
-      this._collectionName
-    );
+  set queryParams(value: Map&lt;string, string | number | boolean&gt;) {
+    if (!value || value.size &#x3D;&#x3D;&#x3D; 0) {
+      return;
+    }
+    this._query &#x3D; Str.empty;
+    value.forEach((v, k) &#x3D;&gt; this._query +&#x3D; &#x60;&amp;${k}&#x3D;${v}&#x60;);
+    this._query &#x3D; this._query.substring(1);
   }
 
   /**
-   * Parse connection string and retrieve all the params
-   * @param value
+   * Hash fragment
    */
-  private parseConnectionString(value: string) {
-    const url &#x3D; new Url(value);
-    this._isDnsSeedlist &#x3D; url.protocol.match(/\+srv/gi) ? true : false;
-    this._domain &#x3D; url.domain;
-    if (url.port) {
-      this._domain +&#x3D; &#x60;:${url.port}&#x60;;
+  private _hash: string;
+
+  /**
+   * Hash fragment
+   */
+  get hashFragment(): string { return this._hash; }
+
+  /**
+   * Hash fragment
+   */
+  set hashFragment(value: string) {
+    this._hash &#x3D; value;
+  }
+
+  /**
+   * Return &#x60;true&#x60; if SSL is used
+   */
+  get isSsl(): boolean { return this._scheme &#x3D;&#x3D;&#x3D; &#x27;https&#x27;}
+
+  /**
+   * Create the &#x60;Url&#x60; instance with the uri string or empty to construct it from zero.
+   *
+   * @example
+   * const url &#x3D; new Url(&#x27;https://tools.ietf.org/html/rfc3986#appendix-B&#x27;);
+   *
+   * @param url standard &#x60;uri&#x60; string
+   */
+  constructor(url?: string) {
+    if (Str.isNullOrWhiteSpace(url)) {
+      return;
     }
-    if (url.username &amp;&amp; url.password) {
-      this._userName &#x3D; url.username;
-      this._password &#x3D; url.password;
+    url &#x3D; url.trim();
+    url &#x3D; url.startsWith(&#x27;//&#x27;) ? &#x60;http:${url}&#x60; : url;
+    const shemeValidator &#x3D; new RegExp(URI_SCHEME_VALIDATOR, &#x27;gi&#x27;);
+    url &#x3D; shemeValidator.test(url) ? url : &#x60;http://${url}&#x60;;
+    const uriParseRegex &#x3D; new RegExp(URI_PARSE_REGEX, &#x27;gi&#x27;);
+    const parsed &#x3D; uriParseRegex.exec(url);
+    if (!parsed || Str.isNullOrWhiteSpace(parsed[4])) {
+      throw new Error(&#x27;Not valid URL provided&#x27;);
     }
-    this._dbName &#x3D; url.pathParams &amp;&amp; url.pathParams.length &gt; 0 ? url.pathParams[0] : undefined;
-    if (url.queryParams.get(&#x27;retryWrites&#x27;)) {
-      this._isRetryWrites &#x3D; url.queryParams.get(&#x27;retryWrites&#x27;) as boolean;
+    this._scheme &#x3D; Str.isNullOrWhiteSpace(parsed[1]) ? &#x27;http&#x27; : parsed[2];
+    this.splitDomainAndAuth(parsed[4]);
+    this._path &#x3D; parsed[5];
+    this._query &#x3D; parsed[7];
+    this._hash &#x3D; parsed[9];
+  }
+
+  /**
+   * Return &#x60;true&#x60; if provided value can be parsed as valid URI
+   * @param value URI to test
+   */
+  public static isUrl(value: string): boolean {
+    const uriParseRegex &#x3D; new RegExp(URI_PARSE_REGEX, &#x27;gi&#x27;);
+    const parsed &#x3D; uriParseRegex.exec(value);
+    return parsed &amp;&amp; !!parsed[4];
+  }
+
+  /**
+   * Return string representation of the whole URL
+   */
+  public toString(): string {
+    let url &#x3D; &#x60;${this._scheme}://&#x60;;
+    if (!Str.isNullOrWhiteSpace(this._username)) {
+      url +&#x3D; &#x60;${this._username}:${this._password}@&#x60;;
     }
-    if (url.queryParams.get(&#x27;w&#x27;)) {
-      this._writeConcern &#x3D; url.queryParams.get(&#x27;w&#x27;) as string | number;
+    url +&#x3D; this._domainName;
+    if (this._port) {
+      url +&#x3D; &#x60;:${this._port}&#x60;;
+    }
+    if (!Str.isNullOrWhiteSpace(this._path)) {
+      url +&#x3D; this._path.charAt(0) !&#x3D;&#x3D; &#x27;/&#x27; ? &#x60;/${this._path}&#x60; : this._path;
+    }
+    if (!Str.isNullOrWhiteSpace(this._query)) {
+      url +&#x3D; &#x60;?${this._query}&#x60;;
+    }
+    if (!Str.isNullOrWhiteSpace(this._hash)) {
+      url +&#x3D; &#x60;#${this._hash}&#x60;;
+    }
+    return url;
+  }
+
+  /**
+   * Return &#x60;URL&#x60; object
+   * @see https://developer.mozilla.org/en-US/docs/Web/API/URL
+   */
+  public toURL(): URL {
+    return new URL(this.toString());
+  }
+
+  /**
+   * Parse authority value to retrieve domain, port
+   * username and password
+   * @param value authority value
+   */
+  private splitDomainAndAuth(value: string) {
+    const valueSplitted &#x3D; value.split(&#x27;@&#x27;);
+    const domain &#x3D; valueSplitted.length &#x3D;&#x3D;&#x3D; 2 ? valueSplitted[1] : valueSplitted[0];
+    if (valueSplitted.length &gt; 1) {
+      const credentials &#x3D; valueSplitted[0].split(&#x27;:&#x27;);
+      this._username &#x3D; credentials[0];
+      this._password &#x3D; credentials[1];
+    }
+    const domainSplitted &#x3D; domain.split(&#x27;:&#x27;);
+    this.domain &#x3D; domainSplitted[0];
+    if (domainSplitted.length &gt; 1 &amp;&amp; !isNaN(+domainSplitted[1])) {
+      this._port &#x3D; +domainSplitted[1];
     }
   }
 }
@@ -1610,7 +1873,7 @@ export class MongoConnectionSettingsBuilder {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'class';
-            var COMPODOC_CURRENT_PAGE_URL = 'MongoConnectionSettingsBuilder.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'Url.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

@@ -133,6 +133,10 @@
                             </li>
                             <li>
                                     <span class="modifier">Static</span>
+                                <a href="#parseNumBool">parseNumBool</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Static</span>
                                 <a href="#random">random</a>
                             </li>
                             <li>
@@ -1006,6 +1010,86 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="parseNumBool"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Static</span>
+                            parseNumBool
+                        </b>
+                        <a href="#parseNumBool"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>parseNumBool(str: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="268"
+                            class="link-to-prism">libs/toolbox/src/lib/str/str.ts:268</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Try to find number or boolean value in a provided string
+and return converted value</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>str</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <p>string to parse</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>string | number | boolean</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="random"></a>
                     <span class="name">
                         <b>
@@ -1661,7 +1745,7 @@ export class Str {
    * @param str
    */
   public static isDomainName(str: string): boolean {
-    return !Str.isNullOrWhiteSpace(str) &amp;&amp; DOMAIN_NAME_REGEXP.test(str);
+    return !Str.isNullOrWhiteSpace(str) &amp;&amp; (!!str.match(/localhost/gi) || DOMAIN_NAME_REGEXP.test(str));
   }
 
   /**
@@ -1762,9 +1846,32 @@ export class Str {
     chars &#x3D; Arr.shuffle(chars);
     const result: string[] &#x3D; [];
     for(let i &#x3D; 0; i &lt; size; i++) {
-      result[i] &#x3D; chars[Rnd.next(0, chars.length)];
+      result[i] &#x3D; chars[Rnd.next(0, chars.length - 1)];
     }
     return result.join(&#x27;&#x27;);
+  }
+
+  /**
+   * Try to find number or boolean value in a provided string
+   * and return converted value
+   * @param str string to parse
+   */
+  public static parseNumBool(str: string): string | number | boolean {
+    if (Str.isNullOrWhiteSpace(str)) {
+      return str;
+    }
+    str &#x3D; str.trim();
+    let result: string | number | boolean;
+    if (str.toLowerCase() &#x3D;&#x3D;&#x3D; &#x27;true&#x27;) {
+      result &#x3D; true;
+    } else if (str.toLowerCase() &#x3D;&#x3D;&#x3D; &#x27;false&#x27;) {
+      result &#x3D; false;
+    } else if (Str.isNumber(str) &amp;&amp; !isNaN(+str)) {
+      result &#x3D; +str;
+    } else {
+      result &#x3D; str;
+    }
+    return result;
   }
 }
 </code></pre>

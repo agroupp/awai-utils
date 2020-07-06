@@ -109,6 +109,10 @@
                             </li>
                             <li>
                                     <span class="modifier">Static</span>
+                                <a href="#removeEmptyStrings">removeEmptyStrings</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Static</span>
                                 <a href="#shuffle">shuffle</a>
                             </li>
                             <li>
@@ -559,6 +563,80 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="removeEmptyStrings"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Static</span>
+                            removeEmptyStrings
+                        </b>
+                        <a href="#removeEmptyStrings"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>removeEmptyStrings(arr: string[])</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="114"
+                            class="link-to-prism">libs/toolbox/src/lib/arr/arr.ts:114</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Remove empty string elements from string array</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>arr</td>
+                                    <td>
+                                            <code>string[]</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>string[]</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="shuffle"></a>
                     <span class="name">
                         <b>
@@ -896,6 +974,20 @@ export class Arr {
       const temp &#x3D; result[k];
       result[k] &#x3D; result[n];
       result[n] &#x3D; temp;
+    }
+    return result;
+  }
+
+  /**
+   * Remove empty string elements from string array
+   * @param arr
+   */
+  public static removeEmptyStrings(arr: string[]): string[] {
+    const result: string[] &#x3D; [];
+    for(let i &#x3D; 0; i &lt; arr.length; i++) {
+      if (!Str.isNullOrWhiteSpace(arr[i])) {
+        result.push(arr[i]);
+      }
     }
     return result;
   }

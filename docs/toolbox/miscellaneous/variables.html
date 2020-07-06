@@ -84,6 +84,12 @@
                         <li>
                             <a href="#NEW_LINE_BOUNDARIES" title="libs/toolbox/src/lib/str/str.ts"><b>NEW_LINE_BOUNDARIES</b>&nbsp;&nbsp;&nbsp;(libs/.../str.ts)</a>
                         </li>
+                        <li>
+                            <a href="#URI_PARSE_REGEX" title="libs/toolbox/src/lib/url/url.ts"><b>URI_PARSE_REGEX</b>&nbsp;&nbsp;&nbsp;(libs/.../url.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#URI_SCHEME_VALIDATOR" title="libs/toolbox/src/lib/url/url.ts"><b>URI_SCHEME_VALIDATOR</b>&nbsp;&nbsp;&nbsp;(libs/.../url.ts)</a>
+                        </li>
                     </ul>
                 </td>
             </tr>
@@ -349,6 +355,64 @@
                 <tr>
                     <td class="col-md-4">
                         <div class="io-description"><p>Check if the provider called in Nodejs</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+</section>
+    <h3>libs/toolbox/src/lib/url/url.ts</h3>
+    <section>
+    <h3></h3>        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="URI_PARSE_REGEX"></a>
+                        <span class="name">
+                            <b>
+                            URI_PARSE_REGEX</b>
+                            <a href="#URI_PARSE_REGEX"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>/^(([^:/?#]+):)?(\/\/([^/?#]*))?([^?#]*)(\?([^#]*))?(#(.*))?/</code>
+                        </td>
+                    </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>URI reference parsing regular expression
+From RFC 3986 <a href="https://tools.ietf.org/html/rfc3986#appendix-B">https://tools.ietf.org/html/rfc3986#appendix-B</a></p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="URI_SCHEME_VALIDATOR"></a>
+                        <span class="name">
+                            <b>
+                            URI_SCHEME_VALIDATOR</b>
+                            <a href="#URI_SCHEME_VALIDATOR"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>/^([^:/?#]+):/</code>
+                        </td>
+                    </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Check if value includes URI scheme (like http:, https:)</p>
 </div>
                     </td>
                 </tr>

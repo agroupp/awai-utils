@@ -71,6 +71,18 @@ describe('Mongo Adapter', () => {
     await adapter.disconnect();
   });
 
+  it('should connect to MongoDb server', async () => {
+    const adapter = new MongoAdapter(connectionString);
+    await adapter.connect();
+    expect(adapter.isReady).toBeTruthy();
+    expect(adapter.dbName).toEqual('testDb');
+    expect(adapter.db).toBeDefined();
+    const collections = await adapter.getCollections();
+    await adapter.disconnect();
+    expect(collections.length).toEqual(1);
+    await adapter.disconnect();
+  });
+
   it('should count number of documents in collection name testColl1', async () => {
     const adapter = new MongoAdapter(connSettings);
     await adapter.connect();

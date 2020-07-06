@@ -12,7 +12,6 @@ import { MongoStorageObject } from './mongo-storage-object';
 import { Arr } from '@awai/toolbox';
 
 /**
- * @description
  * Abstract class representing repository. Extend this class in your project
  * to create your own repository for specified MongoDB collection.
  *

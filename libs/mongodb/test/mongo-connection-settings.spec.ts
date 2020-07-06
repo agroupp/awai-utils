@@ -15,13 +15,13 @@ describe('MongoConnectionSettings', () => {
   it('Parse domain', () => {
     const connString1 = `mongodb+srv://abc:pWd01!@test.mongodb.net`;
     const connString2 = `mongodb+srv://test.mongodb.net`;
-    const connString3 = `mongodb://localhost:50000,localhost:50001`;
+    const connString3 = `mongodb://127.0.0.1:61839/testDb?`;
     const builder1 = new MongoConnectionSettingsBuilder(connString1);
     expect(builder1.domain).toEqual('test.mongodb.net');
     const builder2 = new MongoConnectionSettingsBuilder(connString2);
     expect(builder2.domain).toEqual('test.mongodb.net');
     const builder3 = new MongoConnectionSettingsBuilder(connString3);
-    expect(builder3.domain).toEqual('localhost:50000,localhost:50001');
+    expect(builder3.domain).toEqual('127.0.0.1:61839');
   });
 
   it('Parse username and password', () => {
